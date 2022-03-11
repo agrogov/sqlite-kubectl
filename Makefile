@@ -1,6 +1,6 @@
 default: docker_build
 
-DOCKER_IMAGE ?= agrogov/sqlite-kubectl
+DOCKER_IMAGE ?= morgulio/sqlite-kubectl
 DOCKER_TAG ?= `git rev-parse --abbrev-ref HEAD`
 
 # Note: Latest version of kubectl may be found at:

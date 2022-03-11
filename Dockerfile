@@ -1,13 +1,13 @@
-ARG BUILDPLATFORM
-FROM ${BUILDPLATFORM}alpine:3
+FROM alpine:3.15
+LABEL maintainer="Alexey Rogov <@agrogov>" \
+      description="Alpine based docker image with SQLite3 and kubectl"
 
-ARG KUBE_VERSION
-ARG TARGETOS
-ARG TARGETARCH
+ENV KUBE_VERSION 1.19.3
 
 RUN apk -U upgrade \
     && apk add --no-cache ca-certificates bash git openssh curl gettext jq sqlite socat \
-    && wget -q https://storage.googleapis.com/kubernetes-release/release/v${KUBE_VERSION}/bin/${TARGETOS}/${TARGETARCH}/kubectl -O /usr/local/bin/kubectl \
+    && ln -s /usr/lib/libcrypto.so.42 /usr/lib/libcrypto.so.1.0.0 \
+    && curl -ksS -o /usr/local/bin/kubectl https://dl.k8s.io/release/v${KUBE_VERSION}/bin/linux/amd64/kubectl \
     && chmod +x /usr/local/bin/kubectl \
     && mkdir /config \
     && chmod g+rwx /config /root \

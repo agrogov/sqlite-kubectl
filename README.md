@@ -20,4 +20,4 @@ Example for use with personal administration or troubleshooting with volume moun
 ## Build
 
 For doing a manual local build of the image:
-`make docker_build`
+`docker build -t morgulio/sqlite-kubectl .`
